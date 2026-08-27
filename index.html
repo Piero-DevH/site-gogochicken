@@ -101,6 +101,7 @@
 
   @media (max-width: 36rem){
     .nav-toggle{ display: flex; order: 3; }
+    .nav{ padding: 0.7rem 1.1rem; }
     .nav-links{
       order: 4;
       flex-basis: 100%;
@@ -145,7 +146,19 @@
     overflow: hidden;
   }
   @media (max-width: 36rem){
-    .hero{ min-height: auto; padding-top: 3rem; padding-bottom: 3.5rem; }
+    .hero{
+      min-height: calc(100dvh - 4.6rem);
+      padding: 1.1rem 1.2rem 1.3rem;
+    }
+    .hero-grid{ gap: 0.4rem; }
+    .locate-tag{ margin-bottom: 0.7rem; padding: 0.35rem 0.85rem 0.35rem 0.55rem; }
+    .headline{ font-size: clamp(2.1rem, 9vw, 2.9rem); line-height: 0.95; }
+    .tagline{ margin-top: 0.7rem; font-size: 0.92rem; }
+    .hero-ctas{ margin-top: 1rem; }
+    .btn{ padding: 0.75rem 1.4rem; }
+    .address-details{ margin-top: 1rem; }
+    .address-details summary{ font-size: 0.8rem; }
+    .hero-visual{ min-height: 8.5rem; }
   }
   @media (max-height: 34rem) and (orientation: landscape){
     .hero{ min-height: auto; padding-top: 5.5rem; padding-bottom: 2.5rem; }
@@ -300,17 +313,11 @@
   .fp-col-r4{ right: 7%; top: 44%; width: 12%; }
   .fp-col-r4 .fp-float{ --rot: -14deg; animation-duration: 5.9s; animation-delay: -2.2s; }
 
-  @media (max-width: 26rem){
-    .fp-col-l1, .fp-col-l2, .fp-col-l3, .fp-col-l4, .fp-col-r1, .fp-col-r2, .fp-col-r3, .fp-col-r4{ display: none; }
-    .fp-logo-wrap{ width: min(66%, 15rem); }
+  @media (max-width: 36rem){
+    .fp-col-l1, .fp-col-l2, .fp-col-l3, .fp-col-l4, .fp-col-r1, .fp-col-r2, .fp-col-r3, .fp-col-r4,
+    .fp-bucket-left-wrap, .fp-bucket-right-wrap{ display: none; }
+    .fp-logo-wrap{ width: min(48%, 11rem); margin-top: 0; }
   }
-
-  .scroll-cue{
-    margin-top: 3rem; display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: clamp(0.85rem, 0.4vw + 0.7rem, 1rem); font-weight: 700; letter-spacing: 0.06em;
-    text-decoration: none; color: var(--paper-dim); transition: color .2s;
-  }
-  .scroll-cue:hover{ color: var(--orange-2); }
 
   /* ---------- BLEED STATEMENT ---------- */
   .bleed{
@@ -361,6 +368,36 @@
   section h2{ font-size: clamp(1.8rem, 4.2vw, 2.6rem); max-width: 20ch; }
 
   .schedule-board{ margin-top: 2.4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1.1rem; }
+  section[data-show-cards="false"] .schedule-board{ display: none; }
+
+  /* ---------- HORÁRIOS RETRÁTEIS (clique para abrir) ---------- */
+  .schedule-details{ }
+  .schedule-details summary{
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .schedule-details summary::-webkit-details-marker{ display: none; }
+  .schedule-details summary h2{ margin: 0; }
+  .schedule-toggle-icon{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem; height: 2.1rem; flex: none;
+    border-radius: 50%;
+    border: 1px solid var(--ink-line);
+    color: var(--orange-2);
+    transition: transform .25s ease, background-color .15s ease;
+    margin-top: 0.3rem;
+  }
+  .schedule-toggle-icon svg{ width: 1rem; height: 1rem; transition: transform .25s ease; }
+  .schedule-details summary:hover .schedule-toggle-icon{ background: rgba(237,27,35,0.08); }
+  .schedule-details[open] .schedule-toggle-icon svg{ transform: rotate(45deg); }
+  .schedule-hint{ margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--paper-dim); }
+  .schedule-details[open] .schedule-hint{ display: none; }
+  .schedule-details .schedule-board{ margin-top: 1.8rem; }
   .day-card{
     background: rgba(255,252,240,0.88); border: 1px solid rgba(34,31,32,0.12); border-radius: 0.6rem;
     padding: 1.5rem 1.4rem; display: flex; flex-direction: column; gap: 0.3rem; position: relative;
@@ -392,6 +429,35 @@
   .btn-disabled:hover{ transform: none; }
   .btn-disabled .soon{ font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; margin-left: 0.35rem; opacity: 0.8; }
   .cta-row{ margin-top: 2.1rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+  /* ---------- BOTÃO PEQUENO (mini) ---------- */
+  .btn-mini{
+    display: inline-flex; align-items: center; gap: 0.4rem; justify-content: center;
+    padding: 0.55rem 0.95rem; border-radius: 0.5rem; font-weight: 700; font-size: 0.8rem;
+    text-decoration: none; border: 1px solid var(--ink-line); color: var(--paper);
+    background: rgba(255,252,240,0.7);
+    transition: transform .15s ease, border-color .15s ease, color .15s ease;
+    white-space: nowrap; cursor: pointer;
+  }
+  .btn-mini:hover{ border-color: var(--orange-2); color: var(--orange-2); transform: translateY(-1px); }
+  .btn-mini svg{ width: 0.95rem; height: 0.95rem; flex: none; }
+
+  /* ---------- ENDEREÇO RETRÁTIL NO HERO ---------- */
+  .address-details{ margin-top: 2.6rem; }
+  .address-details summary{
+    list-style: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    font-size: clamp(0.85rem, 0.4vw + 0.7rem, 1rem); color: var(--paper-dim);
+  }
+  .address-details summary::-webkit-details-marker{ display: none; }
+  .address-details summary svg.pin-icon{ width: 1.25rem; height: 1.25rem; color: var(--orange-2); flex: none; }
+  .address-details summary .chev{ width: 0.85rem; height: 0.85rem; flex: none; transition: transform .2s ease; opacity: 0.6; }
+  .address-details[open] summary .chev{ transform: rotate(180deg); }
+  .address-menu{
+    margin: 0.9rem 0 0; padding-left: 2.05rem;
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+  }
+  .address-copied{ color: var(--orange-2); font-weight: 700; }
 
   .cta{ max-width: none; padding-left: 0; padding-right: 0; background: var(--ink); border-top: 1px solid var(--ink-line); color: rgba(255,248,236,0.75); }
   .cta-inner{ max-width: 96rem; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 4.5rem); }
@@ -444,10 +510,27 @@
         <a class="btn btn-primary" href="https://wa.me/5511944864646?text=Boa%20noite%2C%20gostaria%20de%20fazer%20um%20pedido" target="_blank" rel="noopener">Chamar no WhatsApp</a>
       </div>
 
-      <p class="hero-foot">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.1 7-11.6A7 7 0 0 0 5 9.4C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.4" r="2.4"/></svg>
-        Rua Augusta Aparecida de Carvalho Morais, 157 · abre 28 de agosto
-      </p>
+      <details class="address-details">
+        <summary>
+          <svg class="pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.1 7-11.6A7 7 0 0 0 5 9.4C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.4" r="2.4"/></svg>
+          <span>Rua Augusta Aparecida de Carvalho Morais, 157 · abre 28 de agosto</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="address-menu">
+          <button type="button" class="btn-mini" data-copy-address="Rua Augusta Aparecida de Carvalho Morais, 157, Suzano">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="11" height="11" rx="1.5"/><path d="M5 15V6a1.5 1.5 0 0 1 1.5-1.5H15"/></svg>
+            Copiar endereço
+          </button>
+          <a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=Rua+Augusta+Aparecida+de+Carvalho+Morais%2C+157%2C+Suzano" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.1 7-11.6A7 7 0 0 0 5 9.4C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.4" r="2.4"/></svg>
+            Google Maps
+          </a>
+          <a class="btn-mini" href="https://waze.com/ul?q=Rua+Augusta+Aparecida+de+Carvalho+Morais%2C+157%2C+Suzano&navigate=yes" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1" fill="currentColor" stroke="none"/><path d="M8.5 15c1 .8 2.2 1.2 3.5 1.2s2.5-.4 3.5-1.2"/></svg>
+            Waze
+          </a>
+        </div>
+      </details>
     </div>
 
     <div class="hero-visual" id="heroVisual">
@@ -467,13 +550,25 @@
       </div>
     </div>
 
-    <a class="scroll-cue" href="#horarios">Ver horários da abertura ↓</a>
 </header>
 
-<section id="horarios">
+<!--
+  FLAG: mostrar/esconder os cards de horário abaixo do título.
+  Troque data-show-cards="true" para "false" e os cards somem por completo (nem o clique aparece).
+  Para o clique-para-abrir, use o atributo "open" abaixo: com "open" o card já vem aberto;
+  sem "open" ele começa fechado e o cliente clica para ver.
+-->
+<section id="horarios" data-show-cards="true">
   <p class="eyebrow">Funcionamento</p>
-  <h2>Horários de abertura</h2>
-  <div class="schedule-board">
+  <details class="schedule-details">
+    <summary>
+      <h2>Horários de abertura</h2>
+      <span class="schedule-toggle-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      </span>
+    </summary>
+    <p class="schedule-hint">Toque para ver os dias e horários</p>
+    <div class="schedule-board" data-schedule-cards>
     <div class="day-card">
       <span class="day-name">Segunda</span>
       <span class="day-hours">Fechado</span>
@@ -503,6 +598,7 @@
       <span class="day-hours">17h às 23h</span>
     </div>
   </div>
+  </details>
 </section>
 
 <section id="local">
@@ -599,6 +695,50 @@
     window.addEventListener('resize', function(){
       if (window.innerWidth > 576) closeMenu(); // 36rem
     });
+  })();
+</script>
+
+<script>
+  (function(){
+    var btn = document.querySelector('[data-copy-address]');
+    if (!btn) return;
+    var originalHTML = btn.innerHTML;
+    var resetTimer = null;
+
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var text = btn.getAttribute('data-copy-address');
+
+      function showCopied(){
+        clearTimeout(resetTimer);
+        btn.classList.add('address-copied');
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l5 5 9-10"/></svg> Copiado!';
+        resetTimer = setTimeout(function(){
+          btn.classList.remove('address-copied');
+          btn.innerHTML = originalHTML;
+        }, 2000);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showCopied).catch(function(){
+          fallbackCopy(text, showCopied);
+        });
+      } else {
+        fallbackCopy(text, showCopied);
+      }
+    });
+
+    function fallbackCopy(text, cb){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch(err) {}
+      document.body.removeChild(ta);
+      cb();
+    }
   })();
 </script>
 
